@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Schema"
+    targetNamespace="http://tempuri.org/Schema.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Schema.xsd"
+    xmlns:mstns="http://tempuri.org/Schema.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:attribute name="id" type="id"/>
+  <xs:attribute name="lang" type="xs:language"/>
+
+  <xs:simpleType name="id">
+    <xs:restriction base="xs:Name"/>
+  </xs:simpleType>
+
+  <xs:complexType name="Name">
+    <xs:simpleContent>
+      <xs:extension base="xs:normalizedString">
+        <xs:attribute ref="lang" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="Description">
+    <xs:simpleContent>
+      <xs:extension base="xs:normalizedString">
+        <xs:attribute ref="lang" use="required"/>
+        <xs:attribute name="type" type="DescriptionType" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="DescriptionType">
+    <xs:restriction base="xs:Name">
+      <xs:enumeration value="text"/>
+      <xs:enumeration value="html"/>
+      <xs:enumeration value="markdown"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="Catalog">
+    <xs:sequence>
+      <xs:element name="Definition" type="Definition"/>
+      <xs:element name="Items" type="ItemCollection"/>
+      <xs:element name="Products" type="ProductCollection"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="PriceList"/>
+  <xs:complexType name="Inventory"/>
+
+  <xs:complexType name="Definition">
+    <xs:sequence>
+      <xs:element name="Languages" type="LanguageCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Tags" type="TagCollection" maxOccurs="1"/>
+      <xs:element name="Flags" type="FlagCollection" maxOccurs="1"/>
+      <xs:element name="Attributes" type="AttributeCollection" maxOccurs="1"/>
+      <xs:element name="SellingPoints" type="SellingPointCollection" maxOccurs="1"/>
+      <xs:element name="ImageKinds" type="ImageKindCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="VariationDimensions" type="VariationDimensionCollection" maxOccurs="1"/>
+    </xs:sequence>  
+  </xs:complexType>
+
+  <xs:complexType name="ItemCollection">
+    <xs:sequence>
+      <xs:element name="Item" minOccurs="1" maxOccurs="unbounded" type="Item"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProductCollection">
+    <xs:sequence>
+      <xs:element name="Product" minOccurs="1" maxOccurs="unbounded" type="Product"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="LanguageCollection">
+    <xs:sequence>
+      <xs:element name="Language" type="Language" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="primary" type="xs:language" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Language">
+    <xs:attribute ref="lang" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TagCollection">
+    <xs:sequence>
+      <xs:element name="Tag" type="Tag" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Tag">
+    <xs:simpleContent>
+      <xs:extension base="xs:normalizedString">
+        <xs:attribute ref="id" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="FlagCollection">
+    <xs:sequence>
+      <xs:element name="Flag" type="Flag" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Flag">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeCollection">
+    <xs:sequence>
+      <xs:element name="Attribute" type="Attribute" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="Visibilities">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="public"/>
+      <xs:enumeration value="private"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="Value">
+    <xs:sequence>
+      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ValueCollection">
+    <xs:sequence>
+      <xs:element name="Value" type="Value" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Attribute">
+    <xs:sequence>
+      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Values" type="ValueCollection" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="visibility" type="Visibilities" default="public"/>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="SellingPointCollection">
+    <xs:sequence>
+      <xs:element name="SellingPoint" type="SellingPoint" minOccurs="1" maxOccurs="unbounded"/>    
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SellingPoint">
+    <xs:sequence>
+      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="id"/>
+  </xs:complexType>
+
+  <xs:complexType name="ImageKindCollection">
+    <xs:sequence>
+      <xs:element name="ImageKind" type="ImageKind" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ImageKind">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ImageCollection">
+    <xs:sequence>
+      <xs:element name="Image" type="Image" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Image">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id" use="required"/>
+        <xs:attribute name="type" type="ImageSources" use="required"/>
+        <xs:attribute name="kind_id" type="id" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="ImageSources">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="url"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="VariationDimensionCollection">
+    <xs:sequence>
+      <xs:element name="VariationDimension" type="VariationDimension" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VariationDimension">
+    <xs:sequence>
+      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Values" type="ValueCollection" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Item"/>
+  
+  <xs:complexType name="Product">
+    <xs:sequence>
+      <xs:element name="Variants" type="VariantCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="VariantImages" type="VariantImageCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Name" type="Name" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Description" type="Description" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Tags" type="TagRefCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Flags" type="FlagRefCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Attributes" type="AttributeValueCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SellingPoints" type="SellingPointRefCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Images" type="ImageRefCollection" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute ref="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="TagRefCollection">
+    <xs:sequence>
+      <xs:element name="Tag" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FlagRefCollection">
+    <xs:sequence>
+      <xs:element name="Flag" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeValueCollection">
+    <xs:sequence>
+      <xs:element name="Attribute" type="AttributeValueRef" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeValueRef">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id" use="required"/>
+        <xs:attribute name="value_id" type="id" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SellingPointRefCollection">
+    <xs:sequence>
+      <xs:element name="SellingPoint" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ImageRefCollection">
+    <xs:sequence>
+      <xs:element name="Image" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VariantImageCollection">
+    <xs:sequence>
+      <xs:element name="VariantImage" type="VariantImage" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Ref">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id" use="required"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="VariantImage">
+    <xs:sequence>
+      <xs:element name="Image" type="Ref"/>
+    </xs:sequence>
+    <xs:attribute ref="id" use="required"/>
+    <xs:attribute name="value_id" type="id" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="VariantCollection">
+    <xs:sequence>
+      <xs:element name="Variant" type="Variant" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Variant">
+    <xs:sequence>
+      <xs:element name="VariationValues" type="VariationValueCollection" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VariationValueCollection">
+    <xs:sequence>
+      <xs:element name="VariationValue" type="VariationValue" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VariationValue">
+    <xs:complexContent>
+      <xs:restriction base="xs:anyType">
+        <xs:attribute ref="id" use="required"/>
+        <xs:attribute name="value_id" use="required" type="id"/>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="Catalog" type="Catalog"/>
+  <xs:element name="PriceList" type="PriceList"/>
+  <xs:element name="Inventory" type="Inventory"/>
+</xs:schema>

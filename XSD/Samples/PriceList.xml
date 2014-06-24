@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PriceList>
+  <Item id="abcd">
+    <Price cur="EUR">20.234</Price>
+  </Item>
+</PriceList>
