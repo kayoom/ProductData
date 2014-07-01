@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <PriceList>
-  <Item id="abcd">
+  <Item id="abcd-1">
     <Prices>
       <Price currency="EUR">
         <SellingPrice>20.23</SellingPrice>

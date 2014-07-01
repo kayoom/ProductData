@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Inventory>
-  <Item id="abcd">
+  <Item id="abcd-1">
     <Availability>
       <Active>true</Active>
       <Replaceable>true</Replaceable>

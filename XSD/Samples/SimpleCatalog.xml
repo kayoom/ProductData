@@ -135,13 +135,17 @@
           <Image id="foobar"/>
         </VariantImage>
       </VariantImages>
-      <Name>Some Product ABCD</Name>
-      <Description lang="de" type="text">Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.</Description>
-      <Description lang="de" type="html">
-        <![CDATA[
-        <b>Nullam</b> quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.
-        ]]>
-      </Description>
+      <Names>
+        <Name>Some Product ABCD</Name>
+      </Names>
+      <Descriptions>
+        <Description lang="de" type="text">Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.</Description>
+        <Description lang="de" type="html">
+          <![CDATA[
+          <b>Nullam</b> quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.
+          ]]>
+        </Description>
+      </Descriptions>
       <Tags>
         <Tag id="foo"/>
       </Tags>
