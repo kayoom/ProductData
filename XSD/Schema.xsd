@@ -330,7 +330,6 @@
     <xs:sequence>
       <xs:element name="Language" type="Language" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="primary" type="xs:language" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="Language">
@@ -361,7 +360,7 @@
   <xs:complexType name="Flag">
     <xs:complexContent>
       <xs:restriction base="xs:anyType">
-        <xs:attribute ref="id"/>
+        <xs:attribute ref="id" use="required"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
@@ -411,7 +410,7 @@
     <xs:sequence>
       <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute ref="id"/>
+    <xs:attribute ref="id" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="ImageKindCollection">
@@ -423,7 +422,7 @@
   <xs:complexType name="ImageKind">
     <xs:complexContent>
       <xs:restriction base="xs:anyType">
-        <xs:attribute ref="id"/>
+        <xs:attribute ref="id" use="required"/>
       </xs:restriction>
     </xs:complexContent>
   </xs:complexType>
