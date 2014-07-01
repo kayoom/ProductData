@@ -55,10 +55,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="XSD\Schema.xsd">
+    <Content Include="XSD\Schema.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,7 +17,10 @@ namespace ProductData.Tests
         static SchemaTests()
         {
             SchemaSet = new XmlSchemaSet();
-            SchemaSet.Add(null, AbsolutePathRelativeToEntryPointLocation(@"XSD\Schema.xsd"));
+            var path = AbsolutePathRelativeToEntryPointLocation(@"XSD\Schema.xsd");
+            if(!File.Exists(path))
+                throw new Exception("Schema file not found!");
+            SchemaSet.Add(null, path);
         }
 
         private static string AbsolutePathRelativeToEntryPointLocation(string relativePath)
@@ -39,6 +43,18 @@ namespace ProductData.Tests
         public void TestSimpleCatalog()
         {
             TestDoc("SimpleCatalog");
+        }
+
+        [TestMethod]
+        public void TestInventory()
+        {
+            TestDoc("Inventory");
+        }
+
+        [TestMethod]
+        public void TestPriceList()
+        {
+            TestDoc("PriceList");
         }
 
         private void TestDoc(string name)

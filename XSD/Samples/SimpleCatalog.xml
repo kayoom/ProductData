@@ -5,6 +5,18 @@
       <Language lang="de"/>
       <Language lang="en"/>
     </Languages>
+    <ShippingTypes>
+      <ShippingType id="foo">
+        <ShippingCosts>
+          <ShippingCost currency="EUR">
+            5.95
+          </ShippingCost>
+        </ShippingCosts>
+        <Countries>
+          <Country>DE</Country>
+        </Countries>
+      </ShippingType>
+    </ShippingTypes>
     <Tags>
       <Tag id="foo" lang="de">Foo</Tag>
     </Tags>
@@ -16,7 +28,7 @@
         <Name lang="de">Baz</Name>
         <Values>
           <Value id="bus">
-            <Name lang="*">Bus</Name>
+            <Name>Bus</Name>
           </Value>
         </Values>
       </Attribute>
@@ -32,52 +44,88 @@
     <Images>
       <Image id="foobar" type="url" kind_id="default" url="http://example.com/foo.jpg"/>
     </Images>
-      <VariationDimensions>
-        <VariationDimension id="size">
-          <Name lang="de">Groesse</Name>
-          <Name lang="en">Size</Name>
-          <Values>
-            <Value id="80x150">
-              <Name lang="*">
-                80 x 150
-              </Name>
-            </Value>
-            <Value id="120x170">
-              <Name lang="*">
-                120 x 170
-              </Name>
-            </Value>
-          </Values>
-        </VariationDimension>
-        <VariationDimension id="color">
-          <Name lang="de">Farbe</Name>
-          <Name lang="en">Color</Name>
-          <Values>
-            <Value id="red">
-              <Name lang="de">Rot</Name>
-              <Name lang="en">Red</Name>
-            </Value>
-          </Values>
-        </VariationDimension>
-      </VariationDimensions>
+    <VariationDimensions>
+      <VariationDimension id="size">
+        <Name lang="de">Groesse</Name>
+        <Name lang="en">Size</Name>
+        <Values>
+          <Value id="s80x150">
+            <Name>
+              80 x 150
+            </Name>
+          </Value>
+          <Value id="s120x170">
+            <Name>
+              120 x 170
+            </Name>
+          </Value>
+        </Values>
+      </VariationDimension>
+      <VariationDimension id="color">
+        <Name lang="de">Farbe</Name>
+        <Name lang="en">Color</Name>
+        <Values>
+          <Value id="red">
+            <Name lang="de">Rot</Name>
+            <Name lang="en">Red</Name>
+          </Value>
+        </Values>
+      </VariationDimension>
+    </VariationDimensions>
   </Definition>
   <Items>
-    <Item id="abcd-1"/>
-    <Item id="abcd-2"/>
-    <Item id="abcd-3"/>
+    <Item id="abcd-1">
+      <Prices>
+        <Price currency="EUR">
+          <SellingPrice>20.23</SellingPrice>
+          <SuggestedPrice>23.56</SuggestedPrice>
+          <PreviousPrice>22.12</PreviousPrice>
+        </Price>
+      </Prices>
+
+      <Availability>
+        <Active>true</Active>
+        <Replaceable>true</Replaceable>
+        <LeadTime>7</LeadTime>
+        <ReplaceTime>30</ReplaceTime>
+        <InStock>24</InStock>
+      </Availability>
+
+      <Dimensions>
+        <Width>20</Width>
+        <Length>20</Length>
+        <Height>20</Height>
+        <Volume>8000</Volume>
+        <Weight>20</Weight>
+      </Dimensions>
+
+      <Shipping>
+        <ShippingTypes>
+          <ShippingType id="foo"/>
+        </ShippingTypes>
+        
+        <ShippingDimensions>
+          <Width>20</Width>
+          <Length>20</Length>
+          <Height>20</Height>
+          <Volume>8000</Volume>
+          <Weight>20</Weight>
+        </ShippingDimensions>
+      </Shipping>
+    </Item>
   </Items>
   <Products>
     <Product id="abcd">
       <Variants>
         <Variant id="abcd-1">
           <VariationValues>
-            <VariationValue id="size" value_id="80x150"/>
+            <VariationValue id="size" value_id="s80x150"/>
             <VariationValue id="color" value_id="red"/>
           </VariationValues>
         </Variant>
         <Variant id="abcd-2">
           <VariationValues>
-            <VariationValue id="size" value_id="120x170"/>
+            <VariationValue id="size" value_id="s120x170"/>
             <VariationValue id="color" value_id="red"/>
           </VariationValues>
         </Variant>
@@ -87,7 +135,7 @@
           <Image id="foobar"/>
         </VariantImage>
       </VariantImages>
-      <Name lang="*">Some Product ABCD</Name>
+      <Name>Some Product ABCD</Name>
       <Description lang="de" type="text">Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.</Description>
       <Description lang="de" type="html">
         <![CDATA[
