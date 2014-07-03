@@ -4,10 +4,10 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
 >
   <xs:attribute name="id" type="id"/>
-  <xs:attribute name="lang" type="xs:language"/>
+  <xs:attribute name="lang" type="id"/>
 
   <xs:simpleType name="id">
-    <xs:restriction base="xs:Name"/>
+    <xs:restriction base="xs:token"/>
   </xs:simpleType>
 
   <xs:complexType name="Name">
@@ -35,7 +35,7 @@
 
   <xs:complexType name="DescriptionCollection">
     <xs:sequence>
-      <xs:element name="Description" type="Description" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Description" type="Description" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -49,9 +49,10 @@
   
   <xs:complexType name="Catalog">
     <xs:sequence>
-      <xs:element name="Definition" type="Definition"/>
-      <xs:element name="Items" type="ItemCollection"/>
-      <xs:element name="Products" type="ProductCollection"/>
+      <xs:element name="Definition" type="Definition" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Images" type="ImageCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Items" type="ItemCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Products" type="ProductCollection" maxOccurs="1" minOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -70,7 +71,7 @@
 
   <xs:complexType name="PriceCollection">
     <xs:sequence>
-      <xs:element name="Price" type="Price" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Price" type="Price" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -282,19 +283,18 @@
     <xs:sequence>
       <xs:element name="Languages" type="LanguageCollection" maxOccurs="1" minOccurs="1"/>
       <xs:element name="ShippingTypes" type="ShippingTypeCollection" maxOccurs="1" minOccurs="1"/>
-      <xs:element name="Tags" type="TagCollection" maxOccurs="1"/>
-      <xs:element name="Flags" type="FlagCollection" maxOccurs="1"/>
-      <xs:element name="Attributes" type="AttributeCollection" maxOccurs="1"/>
-      <xs:element name="SellingPoints" type="SellingPointCollection" maxOccurs="1"/>
+      <xs:element name="Tags" type="TagCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Flags" type="FlagCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="Attributes" type="AttributeCollection" maxOccurs="1" minOccurs="1"/>
+      <xs:element name="SellingPoints" type="SellingPointCollection" maxOccurs="1" minOccurs="1"/>
       <xs:element name="ImageKinds" type="ImageKindCollection" maxOccurs="1" minOccurs="1"/>
-      <xs:element name="Images" type="ImageCollection" maxOccurs="1" minOccurs="1"/>
-      <xs:element name="VariationDimensions" type="VariationDimensionCollection" maxOccurs="1"/>
+      <xs:element name="VariationDimensions" type="VariationDimensionCollection" maxOccurs="1" minOccurs="1"/>
     </xs:sequence>  
   </xs:complexType>
 
   <xs:complexType name="ShippingTypeCollection">
     <xs:sequence>
-      <xs:element name="ShippingType" minOccurs="1" maxOccurs="unbounded" type="ShippingType"/>
+      <xs:element name="ShippingType" minOccurs="0" maxOccurs="unbounded" type="ShippingType"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -345,12 +345,12 @@
   </xs:complexType>
 
   <xs:complexType name="Language">
-    <xs:attribute ref="lang" use="required"/>
+    <xs:attribute ref="id" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="TagCollection">
     <xs:sequence>
-      <xs:element name="Tag" type="Tag" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Tag" type="Tag" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -365,7 +365,7 @@
 
   <xs:complexType name="FlagCollection">
     <xs:sequence>
-      <xs:element name="Flag" type="Flag" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Flag" type="Flag" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -379,7 +379,7 @@
 
   <xs:complexType name="AttributeCollection">
     <xs:sequence>
-      <xs:element name="Attribute" type="Attribute" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Attribute" type="Attribute" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -392,7 +392,7 @@
   
   <xs:complexType name="Value">
     <xs:sequence>
-      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute ref="id" use="required"/>
   </xs:complexType>
@@ -405,7 +405,7 @@
 
   <xs:complexType name="Attribute">
     <xs:sequence>
-      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Values" type="ValueCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="visibility" type="Visibilities" default="public"/>
@@ -420,7 +420,7 @@
 
   <xs:complexType name="SellingPoint">
     <xs:sequence>
-      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute ref="id" use="required"/>
   </xs:complexType>
@@ -476,7 +476,7 @@
 
   <xs:complexType name="VariationDimension">
     <xs:sequence>
-      <xs:element name="Name" type="Name" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Values" type="ValueCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute ref="id" use="required"/>
@@ -780,7 +780,7 @@
 
   <xs:complexType name="ShippingTypeRefCollection">
     <xs:sequence>
-      <xs:element name="ShippingType" type="ShippingTypeRef" minOccurs="1" maxOccurs ="unbounded"/>
+      <xs:element name="ShippingType" type="ShippingTypeRef" minOccurs="0" maxOccurs ="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -822,34 +822,34 @@
   
   <xs:complexType name="Product">
     <xs:sequence>
-      <xs:element name="Variants" type="VariantCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="VariantImages" type="VariantImageCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Names" type="NameCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Descriptions" type="DescriptionCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Tags" type="TagRefCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Flags" type="FlagRefCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Attributes" type="AttributeValueCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="SellingPoints" type="SellingPointRefCollection" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="Images" type="ImageRefCollection" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Variants" type="VariantCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="VariantImages" type="VariantImageCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Descriptions" type="DescriptionCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Tags" type="TagRefCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Flags" type="FlagRefCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Attributes" type="AttributeValueCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="SellingPoints" type="SellingPointRefCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="Images" type="ImageRefCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute ref="id" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="TagRefCollection">
     <xs:sequence>
-      <xs:element name="Tag" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Tag" type="Ref" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="FlagRefCollection">
     <xs:sequence>
-      <xs:element name="Flag" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Flag" type="Ref" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="AttributeValueCollection">
     <xs:sequence>
-      <xs:element name="Attribute" type="AttributeValueRef" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Attribute" type="AttributeValueRef" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -864,19 +864,19 @@
 
   <xs:complexType name="SellingPointRefCollection">
     <xs:sequence>
-      <xs:element name="SellingPoint" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="SellingPoint" type="Ref" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="ImageRefCollection">
     <xs:sequence>
-      <xs:element name="Image" type="Ref" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Image" type="Ref" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="VariantImageCollection">
     <xs:sequence>
-      <xs:element name="VariantImage" type="VariantImage" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="VariantImage" type="VariantImage" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -890,7 +890,7 @@
 
   <xs:complexType name="VariantImage">
     <xs:sequence>
-      <xs:element name="Image" type="Ref"/>
+      <xs:element name="Images" type="ImageRefCollection" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute ref="id" use="required"/>
     <xs:attribute name="value_id" type="id" use="required"/>
@@ -898,7 +898,7 @@
 
   <xs:complexType name="VariantCollection">
     <xs:sequence>
-      <xs:element name="Variant" type="Variant" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="Variant" type="Variant" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

@@ -33,6 +33,7 @@
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +41,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DOM\Catalog.cs" />
+    <Compile Include="DOM\DescriptionType.cs" />
+    <Compile Include="DOM\Attribute.cs" />
+    <Compile Include="DOM\AttributeValueRef.cs" />
+    <Compile Include="DOM\Definition.cs" />
+    <Compile Include="DOM\Description.cs" />
+    <Compile Include="DOM\Flag.cs" />
+    <Compile Include="DOM\IIdentifiable.cs" />
+    <Compile Include="DOM\Image.cs" />
+    <Compile Include="DOM\ImageKind.cs" />
+    <Compile Include="DOM\Item.cs" />
+    <Compile Include="DOM\Language.cs" />
+    <Compile Include="DOM\ImageType.cs" />
+    <Compile Include="DOM\Name.cs" />
+    <Compile Include="DOM\Product.cs" />
+    <Compile Include="DOM\Ref.cs" />
+    <Compile Include="DOM\SellingPoint.cs" />
+    <Compile Include="DOM\ShippingType.cs" />
+    <Compile Include="DOM\Tag.cs" />
+    <Compile Include="DOM\Value.cs" />
+    <Compile Include="DOM\Variant.cs" />
+    <Compile Include="DOM\VariantImage.cs" />
+    <Compile Include="DOM\VariationDimension.cs" />
+    <Compile Include="DOM\VariationValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SchemaTests.cs" />
   </ItemGroup>
@@ -52,6 +77,7 @@
     </Content>
     <Content Include="XSD\Samples\SimpleCatalog.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

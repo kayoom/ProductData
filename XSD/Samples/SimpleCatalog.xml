@@ -2,8 +2,8 @@
 <Catalog>
   <Definition>
     <Languages>
-      <Language lang="de"/>
-      <Language lang="en"/>
+      <Language id="de"/>
+      <Language id="en"/>
     </Languages>
     <ShippingTypes>
       <ShippingType id="foo">
@@ -25,54 +25,70 @@
     </Flags>
     <Attributes>
       <Attribute id="baz" visibility="public">
-        <Name lang="de">Baz</Name>
+        <Names>
+          <Name lang="de">Baz</Name>
+        </Names>
         <Values>
           <Value id="bus">
-            <Name>Bus</Name>
+            <Names>
+              <Name>Bus</Name>
+            </Names>
           </Value>
         </Values>
       </Attribute>
     </Attributes>
     <SellingPoints>
       <SellingPoint id="sp1">
-        <Name lang="en">Some selling point</Name>
+        <Names>
+          <Name lang="en">Some selling point</Name>
+        </Names>
       </SellingPoint>
     </SellingPoints>
     <ImageKinds>
       <ImageKind id="default"/>
     </ImageKinds>
-    <Images>
-      <Image id="foobar" type="url" kind_id="default" url="http://example.com/foo.jpg"/>
-    </Images>
     <VariationDimensions>
       <VariationDimension id="size">
-        <Name lang="de">Groesse</Name>
-        <Name lang="en">Size</Name>
+        <Names>
+          <Name lang="de">Groesse</Name>
+          <Name lang="en">Size</Name>
+        </Names>
         <Values>
           <Value id="s80x150">
+            <Names>
             <Name>
               80 x 150
             </Name>
+            </Names>
           </Value>
           <Value id="s120x170">
+            <Names>
             <Name>
               120 x 170
             </Name>
+            </Names>
           </Value>
         </Values>
       </VariationDimension>
       <VariationDimension id="color">
-        <Name lang="de">Farbe</Name>
-        <Name lang="en">Color</Name>
+        <Names>
+          <Name lang="de">Farbe</Name>
+          <Name lang="en">Color</Name>
+        </Names>
         <Values>
           <Value id="red">
-            <Name lang="de">Rot</Name>
-            <Name lang="en">Red</Name>
+            <Names>
+              <Name lang="de">Rot</Name>
+              <Name lang="en">Red</Name>
+            </Names>
           </Value>
         </Values>
       </VariationDimension>
     </VariationDimensions>
   </Definition>
+  <Images>
+    <Image id="foobar" type="url" kind_id="default" url="http://example.com/foo.jpg"/>
+  </Images>
   <Items>
     <Item id="abcd-1">
       <Prices>
@@ -132,7 +148,9 @@
       </Variants>
       <VariantImages>
         <VariantImage id="color" value_id="red">
-          <Image id="foobar"/>
+          <Images>
+            <Image id="foobar"/>
+          </Images>
         </VariantImage>
       </VariantImages>
       <Names>
