@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,19 +17,19 @@ namespace ProductData.Tests
         {
             SchemaSet = new XmlSchemaSet();
             var path = AbsolutePathRelativeToEntryPointLocation(@"XSD\Schema.xsd");
-            if(!File.Exists(path))
+            if (!File.Exists(path))
                 throw new Exception("Schema file not found!");
             SchemaSet.Add(null, path);
         }
 
         private static string AbsolutePathRelativeToEntryPointLocation(string relativePath)
         {
-          var entryPoint = Assembly.GetAssembly(typeof(SchemaTests)) ;
-          var basePath = Path.GetDirectoryName(entryPoint.Location);
-          var combinedPath  = Path.Combine(basePath, relativePath);
-          var canonicalPath = Path.GetFullPath(combinedPath);
+            var entryPoint = Assembly.GetAssembly(typeof (SchemaTests));
+            var basePath = Path.GetDirectoryName(entryPoint.Location);
+            var combinedPath = Path.Combine(basePath, relativePath);
+            var canonicalPath = Path.GetFullPath(combinedPath);
 
-          return canonicalPath ;
+            return canonicalPath;
         }
 
         private static XDocument GetSample(string name)
@@ -71,6 +70,7 @@ namespace ProductData.Tests
         }
     }
 }
+
 //
 //XmlSchemaSet schemas = new XmlSchemaSet();
 //schemas.Add(schemaNamespace, schemaFileName);
