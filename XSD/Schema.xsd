@@ -470,7 +470,7 @@
 
   <xs:complexType name="VariationDimensionCollection">
     <xs:sequence>
-      <xs:element name="VariationDimension" type="VariationDimension" minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="VariationDimension" type="VariationDimension" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -822,7 +822,10 @@
   
   <xs:complexType name="Product">
     <xs:sequence>
-      <xs:element name="Variants" type="VariantCollection" minOccurs="1" maxOccurs="1"/>
+      <xs:choice>
+        <xs:element name="Variants" type="VariantCollection" minOccurs="1" maxOccurs="1"/>
+        <xs:element name="Item" type="Ref" minOccurs="1" maxOccurs="1"/>
+      </xs:choice>
       <xs:element name="VariantImages" type="VariantImageCollection" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Names" type="NameCollection" minOccurs="1" maxOccurs="1"/>
       <xs:element name="Descriptions" type="DescriptionCollection" minOccurs="1" maxOccurs="1"/>
@@ -898,7 +901,7 @@
 
   <xs:complexType name="VariantCollection">
     <xs:sequence>
-      <xs:element name="Variant" type="Variant" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Variant" type="Variant" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 

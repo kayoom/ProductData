@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 
 namespace ProductData.DOM
@@ -18,7 +19,21 @@ namespace ProductData.DOM
             Flags = new List<Ref>();
         }
 
+        public Ref Item { get; set; }
         public List<Variant> Variants { get; set; }
+
+        [XmlIgnore]
+        public bool VariantsSpecified
+        {
+            get { return !ItemSpecified; }
+        }
+
+        [XmlIgnore]
+        public bool ItemSpecified
+        {
+            get { return Item != null; }
+        }
+
         public List<VariantImage> VariantImages { get; set; }
         public List<Name> Names { get; set; }
         public List<Description> Descriptions { get; set; }
