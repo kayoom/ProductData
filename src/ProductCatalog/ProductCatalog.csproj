@@ -104,11 +104,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\lib\ProductDataRendering\ProductDataRendering.csproj">
+    <ProjectReference Include="..\ProductDataRendering\ProductDataRendering.csproj">
       <Project>{bfa4b358-1ed0-4fe7-b78f-59cfa3c0025c}</Project>
       <Name>ProductDataRendering</Name>
     </ProjectReference>
-    <ProjectReference Include="..\lib\ProductData\ProductData.csproj">
+    <ProjectReference Include="..\ProductData\ProductData.csproj">
       <Project>{2da083ce-7e46-4f69-a6eb-cd22fc65458f}</Project>
       <Name>ProductData</Name>
     </ProjectReference>
