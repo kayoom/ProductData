@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{{Name}}</title>
+</head>
+<body>
+    <h1>{{Name}}</h1>
+
+    <img src="{{MainImageURL}}"/>
+
+    <div id="description">
+        {{Description}}
+    </div>
+
+    <div id="selling-points">
+        <ul>
+        {{#each SellingPoints}}
+            <li>{{this}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div id="properties">
+        <table>
+            <tbody>
+                {{#each Properties}}
+                    <tr>
+                        <th>{{Key}}</th>
+                        <td>{{Value}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

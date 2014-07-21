@@ -83,6 +83,7 @@
     <Compile Include="DOM\VariantImage.cs" />
     <Compile Include="DOM\VariationDimension.cs" />
     <Compile Include="DOM\VariationValue.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\SchemaTests.cs" />
   </ItemGroup>
