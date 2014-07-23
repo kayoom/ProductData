@@ -7,8 +7,9 @@
 </head>
 <body>
     <h1>{{Name}}</h1>
+    <h2>{{Price}}</h2>
 
-    <img src="{{MainImageURL}}"/>
+    <img src="{{#imgurl MainImageURL 400}}"/>
 
     <div id="description">
         {{Description}}
@@ -22,6 +23,12 @@
         </ul>
     </div>
 
+    <div id="images">
+        {{#each ImageURLs}}
+            <img src="{{#imgurl this 200}}"/>
+        {{/each}}
+    </div>
+
     <div id="properties">
         <table>
             <tbody>
@@ -30,6 +37,24 @@
                         <th>{{Key}}</th>
                         <td>{{Value}}</td>
                     </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <div id="variants">
+        <table>
+            <tbody>
+                {{#each Variants}}
+                <tr>
+                    <th>
+                    {{#each Values}}
+                        {{Value}}
+                        <br/>
+                    {{/each}}
+                    </th>
+                    <td>{{Item.Price}}</td>
+                </tr>
                 {{/each}}
             </tbody>
         </table>

@@ -80,7 +80,7 @@ namespace ProductCatalog
             Products.Clear();
             foreach (var product in catalog.Products.OrderBy(p => p.Names.Get(langCode)))
             {
-                Products.Add(new Product(product, catalog, langCode));
+                Products.Add(new Product(product, catalog, langCode, "EUR"));
             }
         }
     }
