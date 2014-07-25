@@ -11,31 +11,44 @@ namespace EbayTools
     {
         private readonly ItemType _template;
         private readonly IImageService _imageService;
+        private readonly ISpecificsMatcher _specificsMatcher;
         private readonly XmlSerializer _serializer;
         private readonly MemoryStream _stream;
 
-        public ItemBuilder(ItemType template, IImageService imageService)
+        public ItemBuilder(ItemType template, IImageService imageService = null, ISpecificsMatcher specificsMatcher = null)
         {
             _serializer = new XmlSerializer(typeof(ItemType));
             _stream = new MemoryStream();
             _template = template;
-            _imageService = imageService;
+            _imageService = imageService ?? new DummyImageService();
+            _specificsMatcher = specificsMatcher ?? new DummySpecificsMatcher();
             _serializer.Serialize(_stream, _template);
-
         }
 
-        public ItemType Build(Product product, string body, string sku = null)
+        public ItemType Build(Product product, string body = null, string sku = null)
         {
             sku = sku ?? product.ID;
+            body = body ?? product.Description;
 
             var item = CloneTemplate();
 
             item.SKU = sku;
 
             item.Title = product.Name;
+            if (item.Title.Length > 80)
+                item.Title = item.Title.Substring(0, 80);
             item.Description = body;
 
-            item.PictureDetails.PictureURL = new StringCollection(GetPictureURLs(product));
+            item.LookupAttributeArray = null;
+
+            item.ReservePrice = null;
+            item.BuyItNowPrice = null;
+
+            item.ShippingDetails.CalculatedShippingRate = null;
+
+            var pictureURLs = GetPictureURLs(product);
+            item.PictureDetails.GalleryURL = pictureURLs.First();
+            item.PictureDetails.PictureURL = new StringCollection(pictureURLs);
 
             if (product.Variants.Any())
                 BuildVariants(item, product);
@@ -57,16 +70,16 @@ namespace EbayTools
             {
                 item.ItemSpecifics.Add(new NameValueListType
                 {
-                    Name = property.Key,
-                    Value = new StringCollection {property.Value}
+                    Name = _specificsMatcher.GetKey(property.Key),
+                    Value = new StringCollection {_specificsMatcher.GetValue(property.Key, property.Value)}
                 });
             }
         }
 
         private void BuildItem(ItemType item, Product product)
         {
-            item.Variations.Variation.Clear();
-            item.Variations.VariationSpecificsSet.Clear();
+            if (item.Variations != null)
+                item.Variations = null;
 
             item.Currency = GetCurrency(product.Currency);
             item.StartPrice = new AmountType
@@ -135,6 +148,25 @@ namespace EbayTools
             _stream.Seek(0, SeekOrigin.Begin);
 
             return (ItemType) _serializer.Deserialize(_stream);
+        }
+    }
+
+    public interface ISpecificsMatcher
+    {
+        string GetKey(string key);
+        string GetValue(string key, string value);
+    }
+
+    public class DummySpecificsMatcher : ISpecificsMatcher
+    {
+        public string GetKey(string key)
+        {
+            return key;
+        }
+
+        public string GetValue(string key, string value)
+        {
+            return value;
         }
     }
 }

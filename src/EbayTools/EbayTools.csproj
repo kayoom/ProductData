@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="eBay.Service">
-      <HintPath>..\packages\eBay.3.871.0\lib\net40\eBay.Service.dll</HintPath>
+      <HintPath>..\..\..\..\packages\eBay.3.871.0\lib\net40\eBay.Service.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,15 +42,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ImageService.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="ItemBuilder.cs" />
+    <Compile Include="MaintenanceStrategies\AbstractStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\IEbayPricelist.cs" />
+    <Compile Include="MaintenanceStrategies\InventoryShouldBe.cs" />
+    <Compile Include="MaintenanceStrategies\IStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\ItemAction.cs" />
+    <Compile Include="MaintenanceStrategies\ItemShouldBe.cs" />
+    <Compile Include="MaintenanceStrategies\SimpleItemCancelStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\SimpleItemShouldBe.cs" />
+    <Compile Include="MaintenanceStrategies\SimpleItemUpdateQuantityStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\StrategyStack.cs" />
+    <Compile Include="MaintenanceStrategies\VariationItemAddStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\VariationItemCancelStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\VariationItemShouldBe.cs" />
+    <Compile Include="MaintenanceStrategies\VariationItemUpdateQuantityStrategy.cs" />
+    <Compile Include="MaintenanceStrategies\VariationShouldBe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\ActiveItem.cs" />
+    <Compile Include="Types\ActiveItemsEnumerable.cs" />
+    <Compile Include="Types\ActiveItemsEnumerator.cs" />
+    <Compile Include="Types\AmountTypeExtension.cs" />
+    <Compile Include="Types\SellerListEnumerable.cs" />
+    <Compile Include="Types\StockableItem.cs" />
+    <Compile Include="Types\StockableVariation.cs" />
+    <Compile Include="UploadSiteHostedPicturesCall.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\lib\ProductData\src\ProductDataRendering\ProductDataRendering.csproj">
+    <ProjectReference Include="..\..\..\DotNetLibraries\src\DotNetLibraries.csproj">
+      <Project>{CC8FF06E-974A-4C6A-B7B3-4E452F28E186}</Project>
+      <Name>DotNetLibraries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\EbayLMS\EbayLMS.csproj">
+      <Project>{5C406E18-6D3D-48C0-BEF5-FDEC208334D3}</Project>
+      <Name>EbayLMS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductDataRendering\ProductDataRendering.csproj">
       <Project>{bfa4b358-1ed0-4fe7-b78f-59cfa3c0025c}</Project>
       <Name>ProductDataRendering</Name>
     </ProjectReference>
-    <ProjectReference Include="..\lib\ProductData\src\ProductData\ProductData.csproj">
+    <ProjectReference Include="..\ProductData\ProductData.csproj">
       <Project>{2da083ce-7e46-4f69-a6eb-cd22fc65458f}</Project>
       <Name>ProductData</Name>
     </ProjectReference>

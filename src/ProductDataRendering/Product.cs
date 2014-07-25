@@ -53,7 +53,7 @@ namespace ProductDataRendering
 
         private IEnumerable<string> GetImageURLs()
         {
-            return _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID)).Select(image => image.URL);
+            return _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID)).Select(image => image.URL).Take(1);
         }
 
         public decimal Price
@@ -63,7 +63,7 @@ namespace ProductDataRendering
 
         public IEnumerable<Variant> Variants
         {
-            get { return _domProduct.Variants.Select(v => new Variant(v, _domCatalog, GetItem(v.ID), _langCode)).OrderBy(v => v.Item.Price); }
+            get { return _domProduct.Variants.Select(v => new Variant(v, _domProduct, _domCatalog, GetItem(v.ID), _langCode)).OrderBy(v => v.Item.Price); }
         }
 
         public Item Item

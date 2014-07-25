@@ -8,13 +8,15 @@ namespace ProductDataRendering
     public class Variant
     {
         private readonly ProductData.DOM.Variant _domVariant;
+        private readonly ProductData.DOM.Product _domProduct;
         private readonly Catalog _domCatalog;
         private readonly Item _item;
         private readonly string _langCode;
 
-        public Variant(ProductData.DOM.Variant domVariant, Catalog domCatalog, Item item, string langCode)
+        public Variant(ProductData.DOM.Variant domVariant, ProductData.DOM.Product domProduct, Catalog domCatalog, Item item, string langCode)
         {
             _domVariant = domVariant;
+            _domProduct = domProduct;
             _domCatalog = domCatalog;
             _item = item;
             _langCode = langCode;
@@ -33,6 +35,20 @@ namespace ProductDataRendering
         public string Name
         {
             get { return string.Join(" ", Values.Select(v => v.Key)); }
+        }
+
+        public IEnumerable<string> ImageURLs
+        {
+            get { return GetImageURLs(); }
+        }
+
+        private IEnumerable<string> GetImageURLs()
+        {
+            return
+                _domProduct.VariantImages.Where(
+                    vi => _domVariant.VariationValues.Any(v => v.ID == vi.ID && v.ValueID == vi.ValueID))
+                    .SelectMany(v => v.Images)
+                    .Select(i => _domCatalog.Images.First(im => im.ID == i.ID).URL);
         }
 
         private Dictionary<string, string> GetVariationValues()
