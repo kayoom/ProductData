@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartArguments>c:\\tmp\\catalog1_ebay.xml C:\\Users\\mariantheisen.KAYOOM\\Projects\\Kayoom\\B1Master\\lib\\ProductData\\src\\ProductDataRendering\\examples\\example1.html.hbs</StartArguments>
+  </PropertyGroup>
+</Project>

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Net;
+﻿using System.IO;
+using System.Threading;
 using System.Windows;
 using ProductDataRendering;
-using RestSharp;
 
 namespace ProductCatalog
 {
@@ -19,7 +17,27 @@ namespace ProductCatalog
         {
             InitializeComponent();
             Loaded += (sender, args) => Refresh();
+            Loaded += InitWatcher;
         }
+
+        private void InitWatcher(object sender, RoutedEventArgs e)
+        {
+            Watcher = new FileSystemWatcher(Path.GetDirectoryName(TemplateFileName));
+            Watcher.Changed += WatcherOnChanged;
+            Watcher.Created += WatcherOnChanged;
+            Watcher.Renamed += WatcherOnChanged;
+            Watcher.EnableRaisingEvents = LivePreview.IsChecked.HasValue && LivePreview.IsChecked.Value;
+        }
+
+        private void WatcherOnChanged(object sender, FileSystemEventArgs fileSystemEventArgs)
+        {
+            if (fileSystemEventArgs.FullPath.ToLower() != Path.GetFullPath(TemplateFileName).ToLower())
+                return;
+            if(fileSystemEventArgs.ChangeType != WatcherChangeTypes.Deleted)
+                Refresh();
+        }
+
+        public FileSystemWatcher Watcher { get; set; }
 
         private void RefreshClick(object sender, RoutedEventArgs e)
         {
@@ -28,45 +46,39 @@ namespace ProductCatalog
 
         private void Refresh()
         {
-            var template = new Template();
-            template.LoadFile(TemplateFileName);
+            var template = LoadTemplate();
 
             var renderer = new Renderer(template, new KayoomImageService("http://kis.kayoom.com", "r8VhcAgCGjQWH7R20SBukZYEqnOfodz9"));
             var html = renderer.Render(Product);
 
-            Browser.LoadHTML(html);
-        }
-    }
-    
-    public class KayoomImageService : IImageService
-    {
-        private readonly string _host;
-        private readonly string _apiKey;
+            File.WriteAllText(@"c:\tmp\example1.html", html);
 
-        public KayoomImageService(string host, string apiKey)
-        {
-            _host = host;
-            _apiKey = apiKey;
+            Dispatcher.Invoke(() => Browser.LoadHTML(html));
         }
 
-        public Uri GetURL(Uri baseUri, ImageFormat format)
+        private Template LoadTemplate()
         {
-            var client = new RestClient(_host);
-            var request = new RestRequest("/");
+            var template = new Template();
+            var fileLoaded = false;
+            while (!fileLoaded)
+            {
+                try
+                {
+                    template.LoadFile(TemplateFileName);
+                    fileLoaded = true;
+                }
+                catch (IOException)
+                {
+                    Thread.Sleep(100);
+                }
+            }
+            return template;
+        }
 
-            request.AddParameter("url", baseUri.ToString());
-            request.AddParameter("width", format.Width);
-            request.AddParameter("height", format.Height);
-            request.AddParameter("format", format.Type);
-
-            request.AddHeader("X-ApiKey", _apiKey);
-
-            client.FollowRedirects = false;
-            var response = client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.MovedPermanently)
-                return baseUri;
-
-            return new Uri((string) response.Headers.First(h => h.Name == "Location").Value);
+        private void LivePreviewChecked(object sender, RoutedEventArgs e)
+        {
+            if(Watcher != null)
+                Watcher.EnableRaisingEvents = (LivePreview.IsChecked.HasValue && LivePreview.IsChecked.Value);
         }
     }
 }

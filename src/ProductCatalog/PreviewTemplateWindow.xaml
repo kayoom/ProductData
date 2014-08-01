@@ -6,6 +6,8 @@
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
             <Button Content="Refresh" Click="RefreshClick"/>
+            
+            <CheckBox Content="Live Preview" Checked="LivePreviewChecked" Name="LivePreview" IsChecked="True"/>
         </ToolBar>
         <awe:WebControl Name="Browser"/>
     </DockPanel>

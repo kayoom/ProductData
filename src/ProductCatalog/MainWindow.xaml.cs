@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,24 @@ namespace ProductCatalog
             DataContext = _data;
             WebCore.Initialize(WebConfig.Default);
 
+            Loaded += OnLoaded;
+
             InitializeComponent();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        {
+            var args = Environment.GetCommandLineArgs();
+
+            if (args.Length < 2)
+                return;
+
+            _data.Load(args[1], null);
+
+            if (args.Length < 3)
+                return;
+
+            ShowPreview(args[2], _data.Products.First());
         }
 
         private void LoadXMLClick(object sender, RoutedEventArgs e)
@@ -54,12 +72,17 @@ namespace ProductCatalog
             if (!result.HasValue || !result.Value)
                 return;
 
+            ShowPreview(dialog.FileName, product);
+        }
+
+        private static void ShowPreview(string templateFileName, Product product)
+        {
             var previewWindow = new PreviewTemplateWindow
             {
-                TemplateFileName = dialog.FileName,
+                TemplateFileName = templateFileName,
                 Product = product
             };
-            
+
             previewWindow.ShowDialog();
         }
     }

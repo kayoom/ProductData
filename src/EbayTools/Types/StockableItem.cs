@@ -49,5 +49,10 @@ namespace EbayTools.Types
         {
             get { return Item.SKU; }
         }
+
+        public virtual int Quantity
+        {
+            get { return Item.Quantity - Item.SellingStatus.QuantitySold; }
+        }
     }
 }

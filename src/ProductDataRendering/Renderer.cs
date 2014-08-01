@@ -16,7 +16,6 @@ namespace ProductDataRendering
             _compiler = new FormatCompiler();
             _compiler.RegisterTag(new ImgUrlTagDefinition(imageService), true);
 
-
             _generator = _compiler.Compile(_template.HTML);
         }
 

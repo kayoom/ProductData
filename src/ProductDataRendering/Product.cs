@@ -53,7 +53,7 @@ namespace ProductDataRendering
 
         private IEnumerable<string> GetImageURLs()
         {
-            return _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID)).Select(image => image.URL).Take(1);
+            return _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID)).Select(image => image.URL);
         }
 
         public decimal Price
