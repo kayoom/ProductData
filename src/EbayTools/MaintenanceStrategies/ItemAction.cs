@@ -6,9 +6,6 @@ namespace EbayTools.MaintenanceStrategies
 {
     public class ItemAction
     {
-        public string ItemID { get; private set; }
-        public List<AbstractRequestType> Requests { get; private set; }
-
         public ItemAction(string itemID, IEnumerable<AbstractRequestType> requests = null)
         {
             ItemID = itemID;
@@ -18,7 +15,10 @@ namespace EbayTools.MaintenanceStrategies
         public ItemAction(string itemID, AbstractRequestType request)
         {
             ItemID = itemID;
-            Requests = new List<AbstractRequestType>{request};
+            Requests = new List<AbstractRequestType> {request};
         }
+
+        public string ItemID { get; private set; }
+        public List<AbstractRequestType> Requests { get; private set; }
     }
 }

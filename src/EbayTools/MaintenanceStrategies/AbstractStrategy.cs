@@ -6,16 +6,16 @@ namespace EbayTools.MaintenanceStrategies
 {
     public abstract class AbstractStrategy : IStrategy
     {
-        public SKUDetailsType[] SKUDetails { get; private set; }
-        public abstract bool IsApplicable(ItemShouldBe item);
-        public abstract IEnumerable<ItemAction> Apply(ItemShouldBe item);
-        public ILookup<string, SKUDetailsType> SKUDetailsLookup { get; private set; }
-
         protected AbstractStrategy(IEnumerable<SKUDetailsType> skuDetails)
         {
             SKUDetails = skuDetails.ToArray();
             SKUDetailsLookup = SKUDetails.ToLookup(s => s.SKU);
         }
+
+        public SKUDetailsType[] SKUDetails { get; private set; }
+        public ILookup<string, SKUDetailsType> SKUDetailsLookup { get; private set; }
+        public abstract bool IsApplicable(ItemShouldBe item);
+        public abstract IEnumerable<ItemAction> Apply(ItemShouldBe item);
 
         protected virtual IEnumerable<SKUDetailsType> GetItemIs(string sku)
         {

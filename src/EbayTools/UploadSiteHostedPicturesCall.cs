@@ -10,12 +10,12 @@ namespace EbayTools
 {
     public class UploadSiteHostedPicturesCall
     {
-        public ApiContext ApiContext { get; set; }
-
         public UploadSiteHostedPicturesCall(ApiContext apiContext)
         {
             ApiContext = apiContext;
         }
+
+        public ApiContext ApiContext { get; set; }
 
         public string Token
         {
@@ -26,7 +26,7 @@ namespace EbayTools
         {
             get { return ApiContext.ApiCredential.ApiAccount.Developer; }
         }
-        
+
         public string AppID
         {
             get { return ApiContext.ApiCredential.ApiAccount.Application; }
@@ -61,7 +61,8 @@ namespace EbayTools
         {
             get
             {
-                return "<?xml version=\"1.0\" encoding=\"utf-8\"?><UploadSiteHostedPicturesRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\"><ExternalPictureURL>{0}</ExternalPictureURL><RequesterCredentials><eBayAuthToken>{1}</eBayAuthToken></RequesterCredentials></UploadSiteHostedPicturesRequest>";
+                return
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?><UploadSiteHostedPicturesRequest xmlns=\"urn:ebay:apis:eBLBaseComponents\"><ExternalPictureURL>{0}</ExternalPictureURL><RequesterCredentials><eBayAuthToken>{1}</eBayAuthToken></RequesterCredentials></UploadSiteHostedPicturesRequest>";
             }
         }
 

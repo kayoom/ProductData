@@ -15,7 +15,7 @@ namespace EbayTools.MaintenanceStrategies
             var itemShouldBe = item as VariationItemShouldBe;
             if (itemShouldBe == null)
                 return false;
-            
+
             var itemsIs = GetItemIs(itemShouldBe.SKU);
             return itemsIs.Any() && itemShouldBe.Variations.All(v => v.Quantity == 0);
         }

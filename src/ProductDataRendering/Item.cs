@@ -5,9 +5,9 @@ namespace ProductDataRendering
 {
     public class Item
     {
-        private readonly ProductData.DOM.Item _domItem;
-        private readonly Catalog _domCatalog;
         private readonly string _currency;
+        private readonly Catalog _domCatalog;
+        private readonly ProductData.DOM.Item _domItem;
 
         public Item(ProductData.DOM.Item domItem, Catalog domCatalog, string currency)
         {
@@ -18,7 +18,10 @@ namespace ProductDataRendering
 
         public decimal Price
         {
-            get { return _domItem.Prices.Where(p => p.Currency == _currency).Select(p => p.SellingPrice).FirstOrDefault(); }
+            get
+            {
+                return _domItem.Prices.Where(p => p.Currency == _currency).Select(p => p.SellingPrice).FirstOrDefault();
+            }
         }
 
         public string Currency

@@ -7,13 +7,14 @@ namespace ProductDataRendering
 {
     public class Variant
     {
-        private readonly ProductData.DOM.Variant _domVariant;
-        private readonly ProductData.DOM.Product _domProduct;
         private readonly Catalog _domCatalog;
+        private readonly ProductData.DOM.Product _domProduct;
+        private readonly ProductData.DOM.Variant _domVariant;
         private readonly Item _item;
         private readonly string _langCode;
 
-        public Variant(ProductData.DOM.Variant domVariant, ProductData.DOM.Product domProduct, Catalog domCatalog, Item item, string langCode)
+        public Variant(ProductData.DOM.Variant domVariant, ProductData.DOM.Product domProduct, Catalog domCatalog,
+            Item item, string langCode)
         {
             _domVariant = domVariant;
             _domProduct = domProduct;

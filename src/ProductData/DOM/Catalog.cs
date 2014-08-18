@@ -21,6 +21,11 @@ namespace ProductData.DOM
         public List<Item> Items { get; set; }
         public List<Product> Products { get; set; }
 
+        private static XmlSerializer Serializer
+        {
+            get { return new XmlSerializer(typeof (Catalog)); }
+        }
+
         public void Save(Stream stream)
         {
             Serializer.Serialize(stream, this);
@@ -34,11 +39,6 @@ namespace ProductData.DOM
         public void Save(string filename, Encoding encoding)
         {
             Serializer.Serialize(new StreamWriter(filename, false, encoding), this);
-        }
-
-        private static XmlSerializer Serializer
-        {
-            get { return new XmlSerializer(typeof (Catalog)); }
         }
 
         public static Catalog Load(Stream stream)

@@ -9,15 +9,16 @@ namespace EbayTools
 {
     public class ItemBuilder
     {
-        private readonly ItemType _template;
         private readonly IImageService _imageService;
-        private readonly ISpecificsMatcher _specificsMatcher;
         private readonly XmlSerializer _serializer;
+        private readonly ISpecificsMatcher _specificsMatcher;
         private readonly MemoryStream _stream;
+        private readonly ItemType _template;
 
-        public ItemBuilder(ItemType template, IImageService imageService = null, ISpecificsMatcher specificsMatcher = null)
+        public ItemBuilder(ItemType template, IImageService imageService = null,
+            ISpecificsMatcher specificsMatcher = null)
         {
-            _serializer = new XmlSerializer(typeof(ItemType));
+            _serializer = new XmlSerializer(typeof (ItemType));
             _stream = new MemoryStream();
             _template = template;
             _imageService = imageService ?? new DummyImageService();
@@ -55,13 +56,15 @@ namespace EbayTools
             else
                 BuildItem(item, product);
 
-            BuildItemSpecifics(item, product);  //TODO: specifics matching
+            BuildItemSpecifics(item, product); //TODO: specifics matching
             return item;
         }
 
         private string[] GetPictureURLs(Product product)
         {
-            return product.ImageURLs.Select(url => _imageService.GetURL(new Uri(url), new ImageFormat()).ToString()).ToArray();
+            return
+                product.ImageURLs.Select(url => _imageService.GetURL(new Uri(url), new ImageFormat()).ToString())
+                    .ToArray();
         }
 
         private void BuildItemSpecifics(ItemType item, Product product)
@@ -138,7 +141,7 @@ namespace EbayTools
 
         private CurrencyCodeType GetCurrency(string currency)
         {
-            if(currency == "EUR")
+            if (currency == "EUR")
                 return CurrencyCodeType.EUR;
             throw new ArgumentException("Unknown currency: " + currency, "currency");
         }

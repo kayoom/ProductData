@@ -5,12 +5,12 @@ namespace EbayTools.MaintenanceStrategies
 {
     public class VariationItemShouldBe : ItemShouldBe
     {
-        public List<VariationShouldBe> Variations { get; private set; }
-
         public VariationItemShouldBe()
         {
             Variations = new List<VariationShouldBe>();
         }
+
+        public List<VariationShouldBe> Variations { get; private set; }
 
         public VariationShouldBe GetVariation(string sku)
         {

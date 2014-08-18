@@ -40,7 +40,10 @@ namespace EbayTools.MaintenanceStrategies
 
         private IEnumerable<SKUDetailsType> GetItemsIs(SimpleItemShouldBe simpleItem)
         {
-            return GetItemIs(simpleItem.SKU).Where(d => d.Quantity != simpleItem.Quantity && (d.Quantity < _limit || simpleItem.Quantity < _limit));
+            return
+                GetItemIs(simpleItem.SKU)
+                    .Where(
+                        d => d.Quantity != simpleItem.Quantity && (d.Quantity < _limit || simpleItem.Quantity < _limit));
         }
     }
 }

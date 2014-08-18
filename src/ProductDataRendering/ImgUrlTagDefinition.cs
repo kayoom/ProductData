@@ -18,10 +18,10 @@ namespace ProductDataRendering
         {
             return new[]
             {
-                new TagParameter("baseUrl"), 
-                new TagParameter("width") { DefaultValue = -1 }, 
-                new TagParameter("height") { DefaultValue = -1 },
-                new TagParameter("format"){ DefaultValue = "jpg" }, 
+                new TagParameter("baseUrl"),
+                new TagParameter("width") {DefaultValue = -1},
+                new TagParameter("height") {DefaultValue = -1},
+                new TagParameter("format") {DefaultValue = "jpg"}
             };
         }
 
@@ -35,9 +35,9 @@ namespace ProductDataRendering
 
             int height;
             if (arguments["height"] is decimal)
-                height = Convert.ToInt32((decimal)arguments["height"]);
+                height = Convert.ToInt32((decimal) arguments["height"]);
             else
-                height = (int)arguments["height"];
+                height = (int) arguments["height"];
 
             var imageFormat = new ImageFormat
             {

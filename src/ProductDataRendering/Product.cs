@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using DotNetLibraries;
 using ProductData;
 using ProductData.DOM;
 
@@ -8,10 +7,10 @@ namespace ProductDataRendering
 {
     public class Product : IProduct
     {
-        private readonly ProductData.DOM.Product _domProduct;
-        private readonly Catalog _domCatalog;
-        private readonly string _langCode;
         private readonly string _currency;
+        private readonly Catalog _domCatalog;
+        private readonly ProductData.DOM.Product _domProduct;
+        private readonly string _langCode;
 
         public Product(ProductData.DOM.Product domProduct, Catalog domCatalog, string langCode, string currency)
         {
@@ -19,6 +18,36 @@ namespace ProductDataRendering
             _domCatalog = domCatalog;
             _langCode = langCode;
             _currency = currency;
+        }
+
+        public IEnumerable<string> ImageURLs
+        {
+            get { return GetImageURLs(); }
+        }
+
+        public decimal Price
+        {
+            get { return GetPrice(); }
+        }
+
+        public IEnumerable<Variant> Variants
+        {
+            get
+            {
+                return
+                    _domProduct.Variants.Select(v => new Variant(v, _domProduct, _domCatalog, GetItem(v.ID), _langCode))
+                        .OrderBy(v => v.Item.Price);
+            }
+        }
+
+        public Item Item
+        {
+            get { return GetItems().First(); }
+        }
+
+        public string Currency
+        {
+            get { return _currency; }
         }
 
         public string Name
@@ -46,29 +75,16 @@ namespace ProductDataRendering
             get { return GetMainImageURL(); }
         }
 
-        public IEnumerable<string> ImageURLs
+        public string ID
         {
-            get { return GetImageURLs(); }
+            get { return _domProduct.ID; }
         }
 
         private IEnumerable<string> GetImageURLs()
         {
-            return _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID)).Select(image => image.URL);
-        }
-
-        public decimal Price
-        {
-            get { return GetPrice(); }
-        }
-
-        public IEnumerable<Variant> Variants
-        {
-            get { return _domProduct.Variants.Select(v => new Variant(v, _domProduct, _domCatalog, GetItem(v.ID), _langCode)).OrderBy(v => v.Item.Price); }
-        }
-
-        public Item Item
-        {
-            get { return GetItems().First(); }
+            return
+                _domProduct.Images.Select(imageRef => _domCatalog.Images.First(i => i.ID == imageRef.ID))
+                    .Select(image => image.URL);
         }
 
         private Item GetItem(string id)
@@ -93,17 +109,7 @@ namespace ProductDataRendering
                 {new Item(_domCatalog.Items.First(i => i.ID == _domProduct.Item.ID), _domCatalog, _currency)};
 
             return _domProduct.Variants.Select(
-                    v => new Item(_domCatalog.Items.First(i => i.ID == v.ID), _domCatalog, _currency));
-        } 
-
-        public string ID
-        {
-            get { return _domProduct.ID; }
-        }
-
-        public string Currency
-        {
-            get { return _currency; }
+                v => new Item(_domCatalog.Items.First(i => i.ID == v.ID), _domCatalog, _currency));
         }
 
         private string GetMainImageURL()
@@ -138,7 +144,7 @@ namespace ProductDataRendering
                 var value = attr.Values.First(v => v.ID == valueID);
                 var valueName = value.Names.Get(_langCode);
 
-                if(string.IsNullOrWhiteSpace(keyName) || string.IsNullOrWhiteSpace(valueName))
+                if (string.IsNullOrWhiteSpace(keyName) || string.IsNullOrWhiteSpace(valueName))
                     continue;
 
                 retVal[keyName] = valueName;

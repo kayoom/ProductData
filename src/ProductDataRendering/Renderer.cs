@@ -4,10 +4,10 @@ namespace ProductDataRendering
 {
     public class Renderer
     {
-        private readonly Template _template;
-        private readonly IImageService _imageService;
         private readonly FormatCompiler _compiler;
         private readonly Generator _generator;
+        private readonly IImageService _imageService;
+        private readonly Template _template;
 
         public Renderer(Template template, IImageService imageService)
         {

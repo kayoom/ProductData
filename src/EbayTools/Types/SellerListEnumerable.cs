@@ -7,11 +7,11 @@ namespace EbayTools.Types
 {
     public class SellerListEnumerable : IEnumerable<ActiveItem>
     {
-        private readonly IService _service;
-        private readonly int _daysRange;
         private readonly List<ActiveItem> _cachedItems;
-        private int _lastLoadedRange;
+        private readonly int _daysRange;
+        private readonly IService _service;
         private bool _fullyLoaded;
+        private int _lastLoadedRange;
 
         public SellerListEnumerable(IService service, int daysRange = 120)
         {
@@ -50,7 +50,7 @@ namespace EbayTools.Types
                 _fullyLoaded = true;
                 return;
             }
-            _cachedItems.AddRange(Enumerable.Cast<ItemType>(list).Select(item => new ActiveItem(item)));
+            _cachedItems.AddRange(list.Cast<ItemType>().Select(item => new ActiveItem(item)));
         }
 
         public ActiveItem Get(int i)

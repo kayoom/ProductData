@@ -17,10 +17,12 @@ namespace EbayTools.Types
         {
             get
             {
-                return Item.Variations == null ? Enumerable.Empty<VariationType>() : Item.Variations.Variation.OfType<VariationType>();
+                return Item.Variations == null
+                    ? Enumerable.Empty<VariationType>()
+                    : Item.Variations.Variation.OfType<VariationType>();
             }
         }
-        
+
         public bool IsVariation()
         {
             return Variations.Any();

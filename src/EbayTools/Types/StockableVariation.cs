@@ -14,21 +14,7 @@ namespace EbayTools.Types
 
         public override string ID
         {
-            get {
-                return MakeID(base.ID, Variation.SKU);
-            }
-        }
-
-        public static string MakeID(string id, string variationSKU)
-        {
-            if (string.IsNullOrWhiteSpace(variationSKU))
-                return null;
-            var sku = variationSKU.Trim();
-            var itemID = id + "-";
-            var n = sku.Length - 30 + itemID.Length;
-            if (n < 0)
-                n = 0;
-            return itemID + sku.Substring(n);
+            get { return MakeID(base.ID, Variation.SKU); }
         }
 
         public override string SKU
@@ -49,6 +35,18 @@ namespace EbayTools.Types
         public override int VariationDims
         {
             get { return Variation.VariationSpecifics.Count; }
+        }
+
+        public static string MakeID(string id, string variationSKU)
+        {
+            if (string.IsNullOrWhiteSpace(variationSKU))
+                return null;
+            var sku = variationSKU.Trim();
+            var itemID = id + "-";
+            var n = sku.Length - 30 + itemID.Length;
+            if (n < 0)
+                n = 0;
+            return itemID + sku.Substring(n);
         }
     }
 }

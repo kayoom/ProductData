@@ -8,8 +8,8 @@ namespace ProductCatalog
 {
     public class KayoomImageService : IImageService
     {
-        private readonly string _host;
         private readonly string _apiKey;
+        private readonly string _host;
 
         public KayoomImageService(string host, string apiKey)
         {

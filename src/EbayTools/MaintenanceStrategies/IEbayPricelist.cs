@@ -4,5 +4,4 @@ namespace EbayTools.MaintenanceStrategies
     {
         double? GetPrice(string itemSKU, string variationSKU, string currency);
     }
-
 }

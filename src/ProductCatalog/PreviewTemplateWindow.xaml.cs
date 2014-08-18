@@ -10,15 +10,16 @@ namespace ProductCatalog
     /// </summary>
     public partial class PreviewTemplateWindow : Window
     {
-        public Product Product { get; set; }
-        public string TemplateFileName { get; set; }
-
         public PreviewTemplateWindow()
         {
             InitializeComponent();
             Loaded += (sender, args) => Refresh();
             Loaded += InitWatcher;
         }
+
+        public Product Product { get; set; }
+        public string TemplateFileName { get; set; }
+        public FileSystemWatcher Watcher { get; set; }
 
         private void InitWatcher(object sender, RoutedEventArgs e)
         {
@@ -33,11 +34,9 @@ namespace ProductCatalog
         {
             if (fileSystemEventArgs.FullPath.ToLower() != Path.GetFullPath(TemplateFileName).ToLower())
                 return;
-            if(fileSystemEventArgs.ChangeType != WatcherChangeTypes.Deleted)
+            if (fileSystemEventArgs.ChangeType != WatcherChangeTypes.Deleted)
                 Refresh();
         }
-
-        public FileSystemWatcher Watcher { get; set; }
 
         private void RefreshClick(object sender, RoutedEventArgs e)
         {
@@ -48,7 +47,8 @@ namespace ProductCatalog
         {
             var template = LoadTemplate();
 
-            var renderer = new Renderer(template, new KayoomImageService("http://kis.kayoom.com", "r8VhcAgCGjQWH7R20SBukZYEqnOfodz9"));
+            var renderer = new Renderer(template,
+                new KayoomImageService("http://kis.kayoom.com", "r8VhcAgCGjQWH7R20SBukZYEqnOfodz9"));
             var html = renderer.Render(Product);
 
             File.WriteAllText(@"c:\tmp\example1.html", html);
@@ -77,7 +77,7 @@ namespace ProductCatalog
 
         private void LivePreviewChecked(object sender, RoutedEventArgs e)
         {
-            if(Watcher != null)
+            if (Watcher != null)
                 Watcher.EnableRaisingEvents = (LivePreview.IsChecked.HasValue && LivePreview.IsChecked.Value);
         }
     }
