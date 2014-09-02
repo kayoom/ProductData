@@ -92,6 +92,7 @@
     <Compile Include="Variant.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="examples\example1.html.hbs" />
     <None Include="packages.config" />
   </ItemGroup>
