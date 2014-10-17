@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2DA083CE-7E46-4F69-A6EB-CD22FC65458F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProductData</RootNamespace>
+    <AssemblyName>ProductData</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DOM\Availability.cs" />
+    <Compile Include="DOM\Catalog.cs" />
+    <Compile Include="DOM\Country.cs" />
+    <Compile Include="DOM\DescriptionType.cs" />
+    <Compile Include="DOM\Attribute.cs" />
+    <Compile Include="DOM\AttributeValueRef.cs" />
+    <Compile Include="DOM\Definition.cs" />
+    <Compile Include="DOM\Description.cs" />
+    <Compile Include="DOM\Dimensions.cs" />
+    <Compile Include="DOM\Flag.cs" />
+    <Compile Include="DOM\IIdentifiable.cs" />
+    <Compile Include="DOM\Image.cs" />
+    <Compile Include="DOM\ImageKind.cs" />
+    <Compile Include="DOM\Inventory.cs" />
+    <Compile Include="DOM\InventoryItem.cs" />
+    <Compile Include="DOM\Item.cs" />
+    <Compile Include="DOM\Language.cs" />
+    <Compile Include="DOM\ImageType.cs" />
+    <Compile Include="DOM\Name.cs" />
+    <Compile Include="DOM\Price.cs" />
+    <Compile Include="DOM\Product.cs" />
+    <Compile Include="DOM\Ref.cs" />
+    <Compile Include="DOM\SellingPoint.cs" />
+    <Compile Include="DOM\Shipping.cs" />
+    <Compile Include="DOM\ShippingCost.cs" />
+    <Compile Include="DOM\ShippingType.cs" />
+    <Compile Include="DOM\Tag.cs" />
+    <Compile Include="DOM\Value.cs" />
+    <Compile Include="DOM\Variant.cs" />
+    <Compile Include="DOM\VariantImage.cs" />
+    <Compile Include="DOM\VariationDimension.cs" />
+    <Compile Include="DOM\VariationValue.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\SchemaTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XSD\Samples\Inventory.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XSD\Samples\PriceList.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XSD\Samples\SimpleCatalog.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XSD\Schema.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

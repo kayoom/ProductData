@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Inventory>
+  <Item id="abcd-1">
+    <Availability>
+      <Active>true</Active>
+      <Replaceable>true</Replaceable>
+      <LeadTime>7</LeadTime>
+      <ReplaceTime>30</ReplaceTime>
+      <InStock>24</InStock>
+    </Availability>
+  </Item>
+</Inventory>

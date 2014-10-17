@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Catalog>
+  <Definition>
+    <Languages>
+      <Language id="de"/>
+      <Language id="en"/>
+    </Languages>
+    <ShippingTypes>
+      <ShippingType id="foo">
+        <ShippingCosts>
+          <ShippingCost currency="EUR">
+            5.95
+          </ShippingCost>
+        </ShippingCosts>
+        <Countries>
+          <Country>DE</Country>
+        </Countries>
+      </ShippingType>
+    </ShippingTypes>
+    <Tags>
+      <Tag id="foo" lang="de">Foo</Tag>
+    </Tags>
+    <Flags>
+      <Flag id="bar"/>
+    </Flags>
+    <Attributes>
+      <Attribute id="baz" visibility="public">
+        <Names>
+          <Name lang="de">Baz</Name>
+        </Names>
+        <Values>
+          <Value id="bus">
+            <Names>
+              <Name>Bus</Name>
+            </Names>
+          </Value>
+        </Values>
+      </Attribute>
+    </Attributes>
+    <SellingPoints>
+      <SellingPoint id="sp1">
+        <Names>
+          <Name lang="en">Some selling point</Name>
+        </Names>
+      </SellingPoint>
+    </SellingPoints>
+    <ImageKinds>
+      <ImageKind id="default"/>
+    </ImageKinds>
+    <VariationDimensions>
+      <VariationDimension id="size">
+        <Names>
+          <Name lang="de">Groesse</Name>
+          <Name lang="en">Size</Name>
+        </Names>
+        <Values>
+          <Value id="s80x150">
+            <Names>
+            <Name>
+              80 x 150
+            </Name>
+            </Names>
+          </Value>
+          <Value id="s120x170">
+            <Names>
+            <Name>
+              120 x 170
+            </Name>
+            </Names>
+          </Value>
+        </Values>
+      </VariationDimension>
+      <VariationDimension id="color">
+        <Names>
+          <Name lang="de">Farbe</Name>
+          <Name lang="en">Color</Name>
+        </Names>
+        <Values>
+          <Value id="red">
+            <Names>
+              <Name lang="de">Rot</Name>
+              <Name lang="en">Red</Name>
+            </Names>
+          </Value>
+        </Values>
+      </VariationDimension>
+    </VariationDimensions>
+  </Definition>
+  <Images>
+    <Image id="foobar" type="url" kind_id="default" url="http://example.com/foo.jpg"/>
+  </Images>
+  <Items>
+    <Item id="abcd-1">
+      <Prices>
+        <Price currency="EUR">
+          <SellingPrice>20.23</SellingPrice>
+          <SuggestedPrice>23.56</SuggestedPrice>
+          <PreviousPrice>22.12</PreviousPrice>
+        </Price>
+      </Prices>
+
+      <Availability>
+        <Active>true</Active>
+        <Replaceable>true</Replaceable>
+        <LeadTime>7</LeadTime>
+        <ReplaceTime>30</ReplaceTime>
+        <InStock>24</InStock>
+      </Availability>
+
+      <Dimensions>
+        <Width>20</Width>
+        <Length>20</Length>
+        <Height>20</Height>
+        <Volume>8000</Volume>
+        <Weight>20</Weight>
+      </Dimensions>
+
+      <Shipping>
+        <ShippingTypes>
+          <ShippingType id="foo"/>
+        </ShippingTypes>
+        
+        <ShippingDimensions>
+          <Width>20</Width>
+          <Length>20</Length>
+          <Height>20</Height>
+          <Volume>8000</Volume>
+          <Weight>20</Weight>
+        </ShippingDimensions>
+      </Shipping>
+    </Item>
+  </Items>
+  <Products>
+    <Product id="abcd">
+      <Variants>
+        <Variant id="abcd-1">
+          <VariationValues>
+            <VariationValue id="size" value_id="s80x150"/>
+            <VariationValue id="color" value_id="red"/>
+          </VariationValues>
+        </Variant>
+        <Variant id="abcd-2">
+          <VariationValues>
+            <VariationValue id="size" value_id="s120x170"/>
+            <VariationValue id="color" value_id="red"/>
+          </VariationValues>
+        </Variant>
+      </Variants>
+      <VariantImages>
+        <VariantImage id="color" value_id="red">
+          <Images>
+            <Image id="foobar"/>
+          </Images>
+        </VariantImage>
+      </VariantImages>
+      <Names>
+        <Name>Some Product ABCD</Name>
+      </Names>
+      <Descriptions>
+        <Description lang="de" type="text">Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.</Description>
+        <Description lang="de" type="html">
+          <![CDATA[
+          <b>Nullam</b> quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Nulla vitae elit libero, a pharetra augue. Etiam porta sem malesuada magna mollis euismod.
+          ]]>
+        </Description>
+      </Descriptions>
+      <Tags>
+        <Tag id="foo"/>
+      </Tags>
+      <Flags>
+        <Flag id="bar"/>
+      </Flags>
+      <Attributes>
+        <Attribute id="baz" value_id="bus"/>
+      </Attributes>
+      <SellingPoints>
+        <SellingPoint id="sp1"/>
+      </SellingPoints>
+      <Images>
+        <Image id="foobar"/>
+      </Images>
+    </Product>
+  </Products>
+</Catalog>
